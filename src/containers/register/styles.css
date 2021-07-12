@@ -1,0 +1,38 @@
+.container{
+    height: 100vh;
+    display: grid;
+    grid-template-areas: "msg form form";
+}
+
+.msg{
+    grid-area: msg;
+    background-color: #270722;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    grid-area: form;
+    background-color: white;
+    display: grid;
+    grid-template-areas: "form-header"
+                         "form-body"
+                         "form-body"
+                         "form-body"
+                         "form-body";
+}
+
+.form-header{
+    font-family: 'McLaren', cursive;
+    color: black;
+    font-size: 2em;
+    grid-area: form-header;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-body{
+    grid-area: form-body;
+}
