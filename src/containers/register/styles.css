@@ -2,7 +2,6 @@
     height: 100vh;
     display: grid;
     grid-template-areas: "msg form form";
-    column-gap: 100px;
 }
 
 .msg{
@@ -20,9 +19,24 @@
     background-color: white;
     flex-direction: column;
     justify-content: center;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .logo-subtitle{
     color: white;
+}
+
+
+@media only screen and (max-width : 600px) {
+    .msg{
+        display: none;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
