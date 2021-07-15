@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
 
-const RegisterForm = () => {
+const RegisterForm = ({ success }) => {
     return (
         <div>
             <h2>Crie sua conta</h2>
@@ -11,7 +11,7 @@ const RegisterForm = () => {
                 <Form.Input icon="at" required label='Email' type="email" placeholder='Digite seu email' />
                 <Form.Input required label='Senha' type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números' />
                 <Form.Input required label='Confirmação de senha' type="password" placeholder='Confirme sua senha' />
-                <Button className="ui button" color="green" size="large" type="submit">Criar conta</Button>
+                <Button onClick={success} className="ui button" color="green" size="large" type="submit">Criar conta</Button>
             </Form>
         </div>
     )
