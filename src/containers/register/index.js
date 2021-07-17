@@ -3,10 +3,15 @@ import './styles.css';
 import Logo from '../../components/logo';
 import RegisterForm from '../../components/registerForm';
 import { connect } from 'react-redux';
-import { success, error } from '../../actions/registerActions';
+import { success, error, register } from '../../actions/registerActions';
 import { Message } from 'semantic-ui-react';
 
 const Register = (props) => {
+    const handleSubmit = (data) => {
+        console.log('Registrando 1o com: ', data)
+        props.register(data)
+    }
+    console.log('Propss' + JSON.stringify(props))
     const successMessage = props.status === 'success' && <Message
         success
         header={props.toastHeader}
@@ -26,17 +31,15 @@ const Register = (props) => {
             <div className="frm">
                 {successMessage}
                 {errorMessage}
-                <RegisterForm success={props.success}></RegisterForm>
+                <RegisterForm registerStatus={props.status} register={handleSubmit} success={props.success}></RegisterForm>
             </div>
         </div>
     )
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log(JSON.stringify(dispatch))
     return {
-        success: () => { dispatch(success()) },
-        error: () => { dispatch(error()) }
+        register: register(dispatch)
     }
 }
 

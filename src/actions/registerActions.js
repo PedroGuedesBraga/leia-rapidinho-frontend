@@ -1,4 +1,5 @@
-import { SUCESSO_REGISTRO, ERRO_REGISTRO } from './actionTypes'
+import { SUCESSO_REGISTRO, ERRO_REGISTRO, INICIO_REGISTRO } from './actionTypes'
+import axios from 'axios';
 
 export const success = () => {
     return {
@@ -21,3 +22,43 @@ export const error = () => {
         }
     }
 }
+
+export const register = (dispatch) => {
+    return (user) => {
+        console.log('Realizando registro do usuario ' + JSON.stringify(user));
+        dispatch({
+            type: INICIO_REGISTRO,
+            payload: {
+                status: 'ongoing'
+            }
+        }
+        );
+        axios.post('http://localhost:8090/users/register', user).then(res => {
+            console.log('sucesso no registro', res)
+            dispatch({
+                type: SUCESSO_REGISTRO,
+                payload: {
+                    status: 'success',
+                    toastHeader: "Quase lá!",
+                    toastContent: "Enviamos um e-mail de confirmação para o endereço informado! Confirme seu e-mail!"
+                }
+            }
+            );
+        }
+        ).catch(err => {
+            console.log('erro no registro', err)
+            dispatch({
+                type: ERRO_REGISTRO,
+                payload: {
+                    status: 'error',
+                    toastHeader: "Houve um erro",
+                    toastContent: "Houve um erro ao tentar realizar o cadastro. Tente novamente após alguns minutos"
+                }
+            }
+            );
+        })
+    }
+}
+
+
+
