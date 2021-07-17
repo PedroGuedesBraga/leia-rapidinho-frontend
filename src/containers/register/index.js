@@ -26,7 +26,7 @@ const Register = (props) => {
         <div className="container">
             <div className="msg">
                 <Logo></Logo>
-                <h2 className="logo-subtitle">Registre-se!</h2>
+                <h2 className="logo-subtitle">Já tem uma conta? Clique aqui e faça login</h2>
             </div>
             <div className="frm">
                 {successMessage}

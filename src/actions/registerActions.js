@@ -47,12 +47,15 @@ export const register = (dispatch) => {
         }
         ).catch(err => {
             console.log('erro no registro', err)
+            const userAlreadyExistsError = err.response && err.response.status && err.response.status === 409
             dispatch({
                 type: ERRO_REGISTRO,
                 payload: {
                     status: 'error',
                     toastHeader: "Houve um erro",
-                    toastContent: "Houve um erro ao tentar realizar o cadastro. Tente novamente após alguns minutos"
+                    toastContent: userAlreadyExistsError ? "Usuário de email informado já existe"
+                        :
+                        "Houve um erro ao tentar realizar o cadastro. Tente novamente após alguns minutos"
                 }
             }
             );
