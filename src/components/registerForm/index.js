@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const RegisterForm = ({ registerStatus, register }) => {
     const INITIAL_STATE = {
@@ -43,8 +44,11 @@ const RegisterForm = ({ registerStatus, register }) => {
                     <Button.Group floated="left">
                         <Button loading={registerStatus === 'ongoing'} disabled={registerStatus === 'ongoing' || user.password !== user.passwordConfirmation} className="ui button" color="green" size="large" type="submit">Criar conta</Button>
                     </Button.Group>
+
                     <Button.Group floated="right">
-                        <Button size="large">Voltar para o login</Button>
+                        <Link to="/login">
+                            <Button className="ui button" size="large" type="submit">Ir para login</Button>
+                        </Link>
                     </Button.Group>
                 </div>
             </Form>

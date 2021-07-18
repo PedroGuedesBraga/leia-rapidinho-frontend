@@ -1,0 +1,27 @@
+.container{
+    height: 100vh;
+    grid-template-areas: "msg msg form";
+}
+
+.msg{
+    grid-area: msg;
+    background-color: #270722;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.frm{
+    grid-area: form;
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.logo-subtitle{
+    color: white;
+}

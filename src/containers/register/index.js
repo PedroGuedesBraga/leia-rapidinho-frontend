@@ -3,15 +3,17 @@ import './styles.css';
 import Logo from '../../components/logo';
 import RegisterForm from '../../components/registerForm';
 import { connect } from 'react-redux';
-import { success, error, register } from '../../actions/registerActions';
+import { register } from '../../actions/registerActions';
 import { Message } from 'semantic-ui-react';
+import { Link, useHistory } from 'react-router-dom';
 
 const Register = (props) => {
+    const history = useHistory();
+
     const handleSubmit = (data) => {
-        console.log('Registrando 1o com: ', data)
         props.register(data)
     }
-    console.log('Propss' + JSON.stringify(props))
+
     const successMessage = props.status === 'success' && <Message
         success
         header={props.toastHeader}
@@ -22,16 +24,21 @@ const Register = (props) => {
         header={props.toastHeader}
         content={props.toastContent}
     />;
+
+    const routeToLogin = () => {
+        history.push('/login');
+    }
+
     return (
         <div className="container">
             <div className="msg">
                 <Logo></Logo>
-                <h2 className="logo-subtitle">Já tem uma conta? Clique aqui e faça login</h2>
+                <h2 className="logo-subtitle">Crie sua conta</h2>
             </div>
             <div className="frm">
                 {successMessage}
                 {errorMessage}
-                <RegisterForm registerStatus={props.status} register={handleSubmit} success={props.success}></RegisterForm>
+                <RegisterForm routeToLogin={routeToLogin} registerStatus={props.status} register={handleSubmit} success={props.success}></RegisterForm>
             </div>
         </div>
     )

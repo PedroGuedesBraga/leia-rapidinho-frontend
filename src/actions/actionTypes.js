@@ -1,3 +1,8 @@
 export const SUCESSO_REGISTRO = "SUCESSO_REGISTRO";
 export const ERRO_REGISTRO = "ERRO_REGISTRO";
 export const INICIO_REGISTRO = "INICIO_REGISTRO";
+
+export const SUCESSO_LOGIN = "SUCESSO_LOGIN";
+export const ERRO_LOGIN = "ERRO_LOGIN";
+export const INICIO_LOGIN = "INICIO_LOGIN";
+
