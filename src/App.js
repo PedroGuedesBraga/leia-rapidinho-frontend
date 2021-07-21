@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import { createStore } from 'redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Menu from './containers/menu'
+import PrivateRoute from './components/privateRoute'
 
 const store = createStore(reducer);
 
@@ -18,6 +20,7 @@ function App() {
           <Route path="/login" exact>
             <Login></Login>
           </Route>
+          <PrivateRoute path="/menu" component={Menu}></PrivateRoute>
         </Switch>
       </Provider>
     </Router>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 const Login = ({ login, status }) => {
@@ -9,6 +9,8 @@ const Login = ({ login, status }) => {
         email: "",
         password: ""
     };
+
+    const history = useHistory();
 
     const [user, setUser] = useState(INITIAL_STATE);
 
@@ -21,7 +23,7 @@ const Login = ({ login, status }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        login(user);
+        login(user, history);
         setUser(INITIAL_STATE);
     }
 
@@ -33,7 +35,7 @@ const Login = ({ login, status }) => {
                 <Form.Input value={user.password} onChange={(e) => handleInputChange(e, 'password')} pattern="([0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required label="Senha" type="password" placeholder='Digite sua senha' />
                 <div>
                     <Button.Group floated="left">
-                        <Button loading={status === 'ongoing'} className="ui button" color="green" size="large" type="submit">Criar conta</Button>
+                        <Button loading={status === 'ongoing'} className="ui button" color="green" size="large" type="submit">Entrar</Button>
                     </Button.Group>
                     <Button.Group floated="right">
                         <Link to="/register">

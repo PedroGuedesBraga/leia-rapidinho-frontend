@@ -1,8 +1,9 @@
 import { SUCESSO_LOGIN, ERRO_LOGIN, INICIO_LOGIN } from '../actions/actionTypes';
 import axios from 'axios';
+import { loginUser } from '../utils';
 
 export const login = (dispatch) => {
-    return (user) => {
+    return (user, history) => {
         console.log('Realizando login do usuario ' + JSON.stringify(user));
         dispatch({
             type: INICIO_LOGIN,
@@ -20,6 +21,9 @@ export const login = (dispatch) => {
                 }
             }
             );
+            loginUser(res.data.access_token);
+            history.push('/menu');
+
         }
         ).catch(err => {
             console.log('erro no login', err)
