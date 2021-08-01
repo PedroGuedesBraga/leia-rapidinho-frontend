@@ -1,0 +1,45 @@
+.container{
+    height: 100vh;
+    display: grid;
+    grid-template-areas: "msg form form";
+}
+
+.msg{
+    grid-area: msg;
+    background-color: #270722;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.frm{
+    grid-area: form;
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.logo-subtitle{
+    color: white;
+}
+
+
+@media only screen and (max-width : 600px) {
+    .msg{
+        display: none;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+

@@ -4,14 +4,18 @@ import LoginForm from '../../components/loginForm';
 import { connect } from 'react-redux';
 import { login } from '../../actions/loginActions';
 import { Message } from 'semantic-ui-react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Login = ({ status, toastHeader, toastBody, login }) => {
 
-    const history = useHistory()
+    const history = useHistory();
 
     const routeToRegister = () => {
-        history.push('/login');
+        history.push('/register');
+    }
+
+    const routeToReset = () => {
+        history.push('/reset');
     }
 
     const errMsg = status === 'error' && (
@@ -29,7 +33,7 @@ const Login = ({ status, toastHeader, toastBody, login }) => {
             </div>
             <div className="frm">
                 {errMsg}
-                <LoginForm routeToRegister={routeToRegister} status={status} login={login}></LoginForm>
+                <LoginForm routeToReset={routeToReset} routeToRegister={routeToRegister} status={status} login={login}></LoginForm>
             </div>
 
         </div>

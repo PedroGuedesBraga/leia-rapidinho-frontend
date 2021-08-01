@@ -1,5 +1,6 @@
 import Register from './containers/register'
 import Login from './containers/login'
+import ResetPassword from './containers/resetPassword';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import { createStore } from 'redux';
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/login" exact>
             <Login></Login>
+          </Route>
+          <Route path="/reset" exact>
+            <ResetPassword></ResetPassword>
           </Route>
           <PrivateRoute path="/menu" component={Menu}></PrivateRoute>
         </Switch>

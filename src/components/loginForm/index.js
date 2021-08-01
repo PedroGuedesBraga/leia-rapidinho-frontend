@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import { Link, useHistory } from 'react-router-dom';
+import './styles.css';
 
 
-const Login = ({ login, status }) => {
+const Login = ({ login, status, routeToRegister, routeToReset }) => {
 
     const INITIAL_STATE = {
         email: "",
@@ -27,24 +28,33 @@ const Login = ({ login, status }) => {
         setUser(INITIAL_STATE);
     }
 
+    const handleForgotPassword = (e) => {
+        e.preventDefault();
+        routeToReset();
+    }
+
     return (
         <div>
             <h2>Entrar</h2>
             <Form loading={status === 'ongoing'} onSubmit={handleSubmit} size="large">
-                <Form.Input value={user.email} onChange={(e) => handleInputChange(e, 'email')} icon="at" required label='Email' type="email" placeholder='Digite seu email' />
-                <Form.Input value={user.password} onChange={(e) => handleInputChange(e, 'password')} pattern="([0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required label="Senha" type="password" placeholder='Digite sua senha' />
+                <Form.Field>
+                    <label>Email *</label>
+                    <input value={user.email} onChange={(e) => handleInputChange(e, 'email')} icon="at" required={true} type="email" placeholder='Digite seu email' ></input>
+                </Form.Field>
+                <Form.Field>
+                    <label>Senha * <a onClick={handleForgotPassword} className="forgot-password">Esqueci minha senha</a></label>
+                    <input value={user.password} onChange={(e) => handleInputChange(e, 'password')} minLength="8" maxLength="32" required={true} label="Senha" type="password" placeholder='Digite sua senha' ></input>
+                </Form.Field>
                 <div>
                     <Button.Group floated="left">
                         <Button loading={status === 'ongoing'} className="ui button" color="green" size="large" type="submit">Entrar</Button>
                     </Button.Group>
                     <Button.Group floated="right">
-                        <Link to="/register">
-                            <Button className="ui button" size="large" type="submit">Criar uma conta</Button>
-                        </Link>
+                        <Button onClick={routeToRegister} className="ui button" size="large" type="submit">Criar uma conta</Button>
                     </Button.Group>
                 </div>
             </Form>
-        </div>
+        </div >
     )
 }
 

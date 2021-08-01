@@ -5,7 +5,7 @@ import RegisterForm from '../../components/registerForm';
 import { connect } from 'react-redux';
 import { register } from '../../actions/registerActions';
 import { Message } from 'semantic-ui-react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Register = (props) => {
     const history = useHistory();
