@@ -6,8 +6,6 @@ const ResetForm = ({
     sendToken,
     resetPassword,
     status,
-    toastHeader,
-    toastBody,
     routeToLogin
 }) => {
 
@@ -22,6 +20,7 @@ const ResetForm = ({
             setTokenSent(true);
         } catch (err) {
             console.log("Erro ao tentar enviar token", err);
+            throw err;
         }
     }
 
@@ -35,9 +34,11 @@ const ResetForm = ({
     const handleTokenVerify = async () => {
         try {
             console.log('Verificando token')
-            await resetPassword({ email, newPassword: data.password, token: data.token })
+            await resetPassword(email, data.password, data.token);
+            routeToLogin();
         } catch (err) {
             console.log(err);
+            throw err;
         }
     }
 
@@ -45,17 +46,19 @@ const ResetForm = ({
         routeToLogin();
     }
 
-    const RouteToLoginButton = () => {
+    const RouteToLoginButton = ({ disabled }) => {
         return <Button size='large' onClick={handleBackToLogin}>Ir para login</Button>
     }
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     }
+
+    const passwordsNotMatching = data.password !== data.passwordConfirmation;
     return (
         <Fragment>
             <h2>Redefinir senha</h2>
-            <Form loading={status === 'ongoing'} onSubmit={() => handleTokenSend()} size="large">
+            <Form loading={status === 'ongoing'} onSubmit={() => !tokenSent ? handleTokenSend() : handleTokenVerify()} size="large">
                 {
                     !tokenSent &&
                     <Fragment>
@@ -83,11 +86,11 @@ const ResetForm = ({
                             <input onChange={(e) => handleDataChange(e, 'password')} pattern="([0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números'></input>
                         </Form.Field>
                         <Form.Field>
-                            <label>Confirme a nova senha</label>
+                            <label>Confirme a nova senha {passwordsNotMatching && <span>- *A senha e a confirmação de senha estão diferentes*</span>}</label>
                             <input onChange={(e) => handleDataChange(e, 'passwordConfirmation')} pattern="([0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números'></input>
                         </Form.Field>
                         <Button.Group floated="left">
-                            <Button onClick={handleTokenVerify} className="ui button" color="green" size="large" type="submit">Redefinir senha</Button>
+                            <Button disabled={passwordsNotMatching} className="ui button" color="green" size="large" type="submit">Redefinir senha</Button>
                         </Button.Group>
                         <Button.Group floated="right">
                             <RouteToLoginButton />

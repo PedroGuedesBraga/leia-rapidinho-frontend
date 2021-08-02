@@ -56,7 +56,9 @@ export const resetPassword = (dispatch) => {
             dispatch({
                 type: SUCESSO_RESET_VERIFY,
                 payload: {
-                    status: 'verifySuccess'
+                    status: 'verifySuccess',
+                    toastHeader: 'Sucesso',
+                    toastContent: 'Sua senha foi redefinida com sucesso!'
                 }
             });
         } catch (err) {

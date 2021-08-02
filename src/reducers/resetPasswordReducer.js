@@ -44,16 +44,16 @@ export const resetReducer = (state = INITIAL_STATE, action) => {
         case SUCESSO_RESET_VERIFY:
             return {
                 ...state,
-                status: action.payload,
+                status: action.payload.status,
                 toastHeader: action.payload.toastHeader,
                 toastMessage: action.payload.toastContent
             }
         case ERRO_RESET_VERIFY:
             return {
                 ...state,
-                status: action.payload,
+                status: action.payload.status,
                 toastHeader: action.payload.toastHeader,
-                toastMessage: action.payload.toastMessage
+                toastMessage: action.payload.toastContent
             }
         default:
             return INITIAL_STATE;

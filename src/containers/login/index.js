@@ -6,7 +6,7 @@ import { login } from '../../actions/loginActions';
 import { Message } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
-const Login = ({ status, toastHeader, toastBody, login }) => {
+const Login = ({ status, toastHeader, toastBody, login, toastResetStatus, toastResetHeader, toastResetBody }) => {
 
     const history = useHistory();
 
@@ -25,6 +25,12 @@ const Login = ({ status, toastHeader, toastBody, login }) => {
             content={toastBody} />
     );
 
+    const successTokenResetMessage = toastResetStatus === 'verifySuccess' && <Message
+        success
+        header={toastResetHeader}
+        content={toastResetBody}
+    />;
+
     return (
         <div className="container">
             <div className="msg">
@@ -33,6 +39,7 @@ const Login = ({ status, toastHeader, toastBody, login }) => {
             </div>
             <div className="frm">
                 {errMsg}
+                {successTokenResetMessage}
                 <LoginForm routeToReset={routeToReset} routeToRegister={routeToRegister} status={status} login={login}></LoginForm>
             </div>
 
@@ -44,7 +51,10 @@ const mapStateToProps = (state) => {
     return {
         status: state.login.status,
         toastHeader: state.login.toastHeader,
-        toastBody: state.login.toastContent
+        toastBody: state.login.toastContent,
+        toastResetStatus: state.reset.status,
+        toastResetHeader: state.reset.toastHeader,
+        toastResetBody: state.reset.toastMessage
     };
 }
 
