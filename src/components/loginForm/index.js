@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './styles.css';
 
 
-const Login = ({ login, status, routeToRegister, routeToReset }) => {
+const Login = ({ login, loading, routeToRegister, routeToReset }) => {
 
     const INITIAL_STATE = {
         email: "",
@@ -23,8 +23,9 @@ const Login = ({ login, status, routeToRegister, routeToReset }) => {
     }
 
     const handleSubmit = (e) => {
+        console.log('logando')
         e.preventDefault();
-        login(user, history);
+        login(user);
         setUser(INITIAL_STATE);
     }
 
@@ -36,7 +37,7 @@ const Login = ({ login, status, routeToRegister, routeToReset }) => {
     return (
         <div>
             <h2>Entrar</h2>
-            <Form loading={status === 'ongoing'} onSubmit={handleSubmit} size="large">
+            <Form loading={loading} onSubmit={handleSubmit} size="large">
                 <Form.Field>
                     <label>Email *</label>
                     <input value={user.email} onChange={(e) => handleInputChange(e, 'email')} icon="at" required={true} type="email" placeholder='Digite seu email' ></input>
@@ -47,7 +48,7 @@ const Login = ({ login, status, routeToRegister, routeToReset }) => {
                 </Form.Field>
                 <div>
                     <Button.Group floated="left">
-                        <Button loading={status === 'ongoing'} className="ui button" color="green" size="large" type="submit">Entrar</Button>
+                        <Button loading={loading} className="ui button" color="green" size="large" type="submit">Entrar</Button>
                     </Button.Group>
                     <Button.Group floated="right">
                         <Button onClick={routeToRegister} className="ui button" size="large" type="submit">Criar uma conta</Button>

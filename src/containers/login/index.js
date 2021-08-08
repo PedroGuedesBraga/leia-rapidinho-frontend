@@ -1,14 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../../components/logo';
 import LoginForm from '../../components/loginForm';
 import { connect } from 'react-redux';
-import { login } from '../../actions/loginActions';
+import { authenticate } from '../../api/user.js';
 import { Message } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { verifyEmail } from '../../api/user'
 
-const Login = ({ status, toastHeader, toastBody, login, toastResetStatus, toastResetHeader, toastResetBody }) => {
+const Login = ({ toastResetStatus, toastResetHeader, toastResetBody }) => {
 
     const history = useHistory();
+    const location = useLocation();
+
+    const [verificationStatus, setVerificationStatus] = useState(null);
+    const [formLoading, setFormLoading] = useState(false);
+    const [errorLogin, setErrorLogin] = useState(false)
+
+    useEffect(() => {
+        const verify = async () => {
+            const params = new URLSearchParams(location.search);
+            const token = params.get('token');
+            const email = params.get('email');
+            if (token && email) {
+                setFormLoading(true)
+                setVerificationStatus('VERIFYING');
+                try {
+                    await verifyEmail(email, token);
+                    setVerificationStatus('SUCCESS')
+                } catch (err) {
+                    setVerificationStatus('ERROR')
+                }
+                setFormLoading(false);
+            }
+        }
+        verify();
+    }, []);
+
+    const login = async (user) => {
+        try {
+            console.log('logando 2')
+            setFormLoading(true);
+            await authenticate(user);
+        } catch (error) {
+            setErrorLogin(true);
+        }
+        setFormLoading(false);
+    }
+
+
 
     const routeToRegister = () => {
         history.push('/register');
@@ -18,17 +57,29 @@ const Login = ({ status, toastHeader, toastBody, login, toastResetStatus, toastR
         history.push('/reset');
     }
 
-    const errMsg = status === 'error' && (
+    const errMsg = errorLogin && (
         <Message
             negative
-            header={toastHeader}
-            content={toastBody} />
+            header={'Houve um erro'}
+            content={'Verifique as credenciais e tente novamente.'} />
     );
 
     const successTokenResetMessage = toastResetStatus === 'verifySuccess' && <Message
         success
         header={toastResetHeader}
         content={toastResetBody}
+    />;
+
+    const successVerifyEmailMessage = verificationStatus === 'SUCCESS' && <Message
+        success
+        header={'Sucesso!'}
+        content={'Email verificado com sucesso.'}
+    />;
+
+    const errorVerifyEmailMessage = verificationStatus === 'ERROR' && <Message
+        negativo
+        header={'Ocorreu um erro na verificação do e-mail.'}
+        content={'Espere um pouco e tente novamente.'}
     />;
 
     return (
@@ -40,7 +91,9 @@ const Login = ({ status, toastHeader, toastBody, login, toastResetStatus, toastR
             <div className="frm">
                 {errMsg}
                 {successTokenResetMessage}
-                <LoginForm routeToReset={routeToReset} routeToRegister={routeToRegister} status={status} login={login}></LoginForm>
+                {successVerifyEmailMessage}
+                {errorVerifyEmailMessage}
+                <LoginForm loading={formLoading} routeToReset={routeToReset} routeToRegister={routeToRegister} login={login}></LoginForm>
             </div>
 
         </div>
@@ -49,19 +102,11 @@ const Login = ({ status, toastHeader, toastBody, login, toastResetStatus, toastR
 
 const mapStateToProps = (state) => {
     return {
-        status: state.login.status,
-        toastHeader: state.login.toastHeader,
-        toastBody: state.login.toastContent,
         toastResetStatus: state.reset.status,
         toastResetHeader: state.reset.toastHeader,
         toastResetBody: state.reset.toastMessage
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: login(dispatch)
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);

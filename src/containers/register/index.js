@@ -1,28 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import Logo from '../../components/logo';
 import RegisterForm from '../../components/registerForm';
-import { connect } from 'react-redux';
-import { register } from '../../actions/registerActions';
 import { Message } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+import { createAccount } from '../../api/user';
 
-const Register = (props) => {
+const Register = () => {
     const history = useHistory();
 
-    const handleSubmit = (data) => {
-        props.register(data)
+    const [errorMessage, setErrorMessage] = useState({ title: null, description: null });
+
+    const [registerStatus, setRegisterStatus] = useState('NOT_SUBMITTED');
+
+    const register = async (user) => {
+        try {
+            setRegisterStatus('SUBMITTED');
+            await createAccount(user);
+            setRegisterStatus('SUCCESS');
+        } catch (err) {
+            if (err.emailAlreadyExists) {
+                setErrorMessage({ title: 'Ocorreu um erro', description: 'Email informado já está em uso.' })
+            } else {
+                setErrorMessage({ title: 'Ocorreu um erro', description: 'Espere alguns minutos e tente novamente mais tarde' });
+            }
+            setRegisterStatus('ERROR');
+        }
     }
 
-    const successMessage = props.status === 'success' && <Message
+    const successToast = registerStatus === 'SUCCESS' && <Message
         success
-        header={props.toastHeader}
-        content={props.toastContent}
+        header={'Sucesso!'}
+        content={'Verifique seu e-mail para concluir o cadastro. Enviamos um e-mail de confirmação'}
     />;
-    const errorMessage = props.status === 'error' && <Message
+    const errorToast = registerStatus === 'ERROR' && <Message
         negative
-        header={props.toastHeader}
-        content={props.toastContent}
+        header={errorMessage.title}
+        content={errorMessage.description}
     />;
 
     const routeToLogin = () => {
@@ -36,26 +50,13 @@ const Register = (props) => {
                 <h2 className="logo-subtitle">Crie sua conta</h2>
             </div>
             <div className="frm">
-                {successMessage}
-                {errorMessage}
-                <RegisterForm routeToLogin={routeToLogin} registerStatus={props.status} register={handleSubmit} success={props.success}></RegisterForm>
+                {successToast}
+                {errorToast}
+                <RegisterForm routeToLogin={routeToLogin} loading={registerStatus === 'SUBMITTED'} register={register}></RegisterForm>
             </div>
         </div>
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        register: register(dispatch)
-    }
-}
 
-const mapStateToProps = (state) => {
-    return {
-        toastContent: state.register.toastContent,
-        toastHeader: state.register.toastHeader,
-        status: state.register.status
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default Register;

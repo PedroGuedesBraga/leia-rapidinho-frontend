@@ -83,11 +83,11 @@ const ResetForm = ({
                         </Form.Field>
                         <Form.Field>
                             <label>Digite a nova senha:</label>
-                            <input onChange={(e) => handleDataChange(e, 'password')} pattern="([0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números'></input>
+                            <input onChange={(e) => handleDataChange(e, 'password')} pattern="([0-9]+[A-Za-z]|[A-Za-z]+[0-9])[A-Za-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números'></input>
                         </Form.Field>
                         <Form.Field>
                             <label>Confirme a nova senha {passwordsNotMatching && <span>- *A senha e a confirmação de senha estão diferentes*</span>}</label>
-                            <input onChange={(e) => handleDataChange(e, 'passwordConfirmation')} pattern="([0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números'></input>
+                            <input onChange={(e) => handleDataChange(e, 'passwordConfirmation')} pattern="([0-9]+[A-Za-z]|[A-Za-z]+[0-9])[A-Za-z0-9]*" title="Verifique se a senha segue o padrão estabelecido" minLength="8" maxLength="32" required type="password" placeholder='Deve conter entre 8 e 32 dígitos, sendo letras e números'></input>
                         </Form.Field>
                         <Button.Group floated="left">
                             <Button disabled={passwordsNotMatching} className="ui button" color="green" size="large" type="submit">Redefinir senha</Button>
