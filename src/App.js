@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import { createStore } from 'redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Menu from './containers/menu'
+import Game from './containers/game'
 import PrivateRoute from './components/privateRoute'
 
 const store = createStore(reducer);
@@ -24,7 +24,7 @@ function App() {
           <Route path="/reset" exact>
             <ResetPassword></ResetPassword>
           </Route>
-          <PrivateRoute path="/menu" component={Menu}></PrivateRoute>
+          <PrivateRoute path="/menu" component={Game}></PrivateRoute>
         </Switch>
       </Provider>
     </Router>

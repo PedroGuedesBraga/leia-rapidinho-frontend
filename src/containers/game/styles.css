@@ -1,0 +1,17 @@
+.game-menu-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0% 30% 0 30%;
+    align-content: center;
+    gap: 3%;
+}
+
+@media only screen and (max-width: 600px){
+    .game-menu-container{
+        padding: 0% 5% 0% 5%;
+        flex-direction: column;
+    }
+}

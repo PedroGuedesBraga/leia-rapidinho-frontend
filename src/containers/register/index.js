@@ -13,6 +13,8 @@ const Register = () => {
 
     const [registerStatus, setRegisterStatus] = useState('NOT_SUBMITTED');
 
+    const [clicked, setClicked] = useState(0)
+
     const register = async (user) => {
         try {
             setRegisterStatus('SUBMITTED');
@@ -39,8 +41,11 @@ const Register = () => {
         content={errorMessage.description}
     />;
 
-    const routeToLogin = () => {
-        history.push('/login');
+    const routeToLogin = (e) => {
+        e.preventDefault();
+        setClicked(clicked + 1);
+        console.log(clicked);
+        history.push('/register');
     }
 
     return (
