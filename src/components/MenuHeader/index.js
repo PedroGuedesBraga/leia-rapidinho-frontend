@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Route } from 'react-router-dom'
-import Game from '../../containers/game'
+import Game from '../../containers/LoggedInArea/game'
 
 const MenuHeader = () => {
     return (

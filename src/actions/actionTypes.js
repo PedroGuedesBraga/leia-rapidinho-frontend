@@ -6,4 +6,10 @@ export const INICIO_RESET_VERIFY = "INICIO_RESET_VERIFY";
 export const ERRO_RESET_VERIFY = "ERRO_RESET_VERIFY";
 export const SUCESSO_RESET_VERIFY = "SUCESSO_RESET_VERIFY";
 
+export const SEM_JOGO = "SEM_JOGO"
+export const BUSCA_PALAVRAS = "BUSCANDO_PALAVRAS"
+export const PREPARAR = "PREPARANDO"
+export const JOGAR = "JOGAR"
+export const FINALIZAR = "FINALIZAR"
+
 

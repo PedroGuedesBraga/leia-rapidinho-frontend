@@ -1,0 +1,19 @@
+.word{
+    font-size: 175px;
+    display: inline-block;
+    margin-top: 30px;
+    font-family: 'McLaren', cursive;
+    color: white;
+    margin-bottom: 30px;;
+}
+
+@media only screen and (max-width : 600px) {
+    .word{
+        font-family: 'McLaren', cursive;
+        font-size: 45px; 
+    }
+}
+
+.error{
+    color: red;
+}
