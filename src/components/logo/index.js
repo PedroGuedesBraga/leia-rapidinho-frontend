@@ -1,9 +1,14 @@
 import React from 'react';
-import './styles.css'
+import './styles.css';
+import { Icon } from 'semantic-ui-react';
 
 const Logo = () => {
     return (
-        <h1 className="logo">Leia Rapidinho</h1>
+        <div>
+            <span className="logo">Leia Rapidinho </span>
+            <Icon name="book" size="huge" inverted></Icon>
+        </div>
+
     )
 }
 

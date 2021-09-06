@@ -1,0 +1,20 @@
+.profile-container{
+    background-color: #270722;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 450px;
+    padding-right: 450px;
+}
+
+@media only screen and (max-width: 600px){
+    .profile-container{
+        padding: 30px;
+    }
+}
+
+.badge-list{
+    display: flex;
+    justify-content: space-around;
+}

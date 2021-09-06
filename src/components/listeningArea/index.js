@@ -5,7 +5,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Confetti from 'react-confetti';
 import { Rating } from 'semantic-ui-react';
 
-const ListeningArea = ({ word, play, currentCount, totalWords }) => {
+const ListeningArea = ({ word, play, currentCount, totalWords, totalTime, onTimeComplete }) => {
     const [error, setError] = useState(false);
     const [confetti, setConfetti] = useState(false)
 
@@ -20,7 +20,7 @@ const ListeningArea = ({ word, play, currentCount, totalWords }) => {
                         setConfetti(true);
                         setTimeout(() => {
                             setConfetti(false);
-                            play()
+                            play(word)
                         }, 2500);
 
                     }
@@ -51,19 +51,19 @@ const ListeningArea = ({ word, play, currentCount, totalWords }) => {
             <Word error={error} word={word} />
             <CountdownCircleTimer isPlaying
                 size={100}
-                duration={25}
-                initialRemainingTime={10}
+                duration={totalTime}
                 colors={[
                     ["#F7B801", 0.33], ["#F7B801", 0.33], ["#EC5800", 0.33]
                 ]}
                 strokeWidth={3}
                 strokeLinecap={'square'}
+                onComplete={() => { onTimeComplete(); return [false, 0] }}
             >
                 {({ remainingTime }) => { return <h3>{remainingTime}s</h3> }}
             </CountdownCircleTimer>
             {confetti && <Confetti gravity={0.5} />}
             <div style={{ width: "200px;" }}>
-                <Rating icon='star' rating={currentCount - 1} maxRating={totalWords} disabled size={'massive'} />
+                <Rating icon='star' rating={currentCount} maxRating={totalWords} disabled size={'massive'} />
             </div>
         </>
     )

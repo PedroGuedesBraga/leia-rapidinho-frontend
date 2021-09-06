@@ -10,6 +10,8 @@ export const SEM_JOGO = "SEM_JOGO"
 export const BUSCA_PALAVRAS = "BUSCANDO_PALAVRAS"
 export const PREPARAR = "PREPARANDO"
 export const JOGAR = "JOGAR"
+export const SALVAR_JOGO = "SALVAR_JOGO"
 export const FINALIZAR = "FINALIZAR"
+export const NOVA_PARTIDA = "NOVA_PARTIDA"
 
 
