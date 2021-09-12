@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 
 const RegisterForm = ({ loading, register, routeToLogin }) => {
     const INITIAL_STATE = {
@@ -32,6 +31,7 @@ const RegisterForm = ({ loading, register, routeToLogin }) => {
 
     return (
         <div>
+
             <h2>Crie sua conta</h2>
             <Form loading={loading} onSubmit={handleSubmit} size="large">
                 <Form.Input value={user.userName} onChange={(e) => { handleInputChange(e, 'userName') }} required label='Nome' placeholder='Digite seu nome' />

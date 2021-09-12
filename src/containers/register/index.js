@@ -45,7 +45,7 @@ const Register = () => {
         e.preventDefault();
         setClicked(clicked + 1);
         console.log(clicked);
-        history.push('/register');
+        history.push('/login');
     }
 
     return (
@@ -55,6 +55,7 @@ const Register = () => {
                 <h2 className="logo-subtitle">Crie sua conta</h2>
             </div>
             <div className="frm">
+                <Logo inverted mobile></Logo>
                 {successToast}
                 {errorToast}
                 <RegisterForm routeToLogin={routeToLogin} loading={registerStatus === 'SUBMITTED'} register={register}></RegisterForm>

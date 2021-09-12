@@ -3,21 +3,33 @@ import { Menu } from 'semantic-ui-react';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import Game from './game';
 import { connect } from 'react-redux';
-import { getWords, play, startNewGame, endGame, saveGame } from '../../actions/gameActions';
-import Profile from '../LoggedInArea/profile'
+import { getWords, play, resetGameState, endGame, saveGame } from '../../actions/gameActions';
+import Profile from '../LoggedInArea/profile';
+import { getProfile } from '../../api/user';
+import { logoutUser } from '../../utils/index';
 
 
-const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime, gameStatus, currentWord, getWords, play, currentCount, totalWords, startNewGame }) => {
+const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime, gameStatus, currentWord, getWords, play, currentCount, totalWords, resetGameState }) => {
 
 
     const location = useLocation();
     const history = useHistory();
+
     const routeToGame = () => {
         history.push('/game');
     }
+
     const routeToProfile = () => {
+        resetGameState();
         history.push('/profile');
     }
+
+    const logout = () => {
+        resetGameState();
+        logoutUser();
+        history.push('login');
+    }
+
 
 
     return (
@@ -25,8 +37,8 @@ const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime
             <div>
                 <Menu borderless widths={3}>
                     <Menu.Item onClick={routeToGame} active={location.pathname === '/game'} name={'Jogo'} icon={'gamepad'}></Menu.Item>
-                    <Menu.Item onClick={routeToProfile} active={location.pathname === '/profile'} name={'Perfil'} icon={'user circle'}></Menu.Item>
-                    <Menu.Item name={'Sair'} icon={'sign-out'}></Menu.Item>
+                    <Menu.Item onClick={routeToProfile} active={location.pathname === '/profile'} name={'Desempenho'} icon={'user circle'}></Menu.Item>
+                    <Menu.Item onClick={logout} name={'Sair'} icon={'sign-out'}></Menu.Item>
                 </Menu>
             </div>
             <Switch>
@@ -38,7 +50,7 @@ const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime
                         word={currentWord}
                         currentCount={currentCount}
                         totalWords={totalWords}
-                        startNewGame={startNewGame}
+                        startNewGame={resetGameState}
                         totalTime={totalTime}
                         endGame={endGame}
                         saveGame={saveGame}
@@ -48,7 +60,7 @@ const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime
                     />
                 </Route>
                 <Route path="/profile">
-                    <Profile></Profile>
+                    <Profile getProfile={getProfile}></Profile>
                 </Route>
             </Switch>
         </>
@@ -71,7 +83,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getWords: getWords(dispatch),
         play: play(dispatch),
-        startNewGame: startNewGame(dispatch),
+        resetGameState: resetGameState(dispatch),
         endGame: endGame(dispatch),
         saveGame: saveGame(dispatch)
     }

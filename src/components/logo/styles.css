@@ -1,7 +1,24 @@
 .logo{
     font-family: 'McLaren', cursive;
-    color: white;
     font-size: 2.8em;
     font-style: italic;
     white-space: pre;
+    color:white;
+}
+
+.logo-inverted{
+    color:black;
+}
+
+.logo-mobile {
+    display: none;
+}
+
+@media only screen and (max-width : 600px){
+    .logo-mobile {
+        display: block;
+    }
+    .logo {
+        font-size: 2em;
+    }
 }

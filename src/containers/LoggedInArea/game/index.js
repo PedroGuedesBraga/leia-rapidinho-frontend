@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import Logo from '../../../components/logo';
 import './styles.css';
-import { Button, Icon, Loader, Rating } from 'semantic-ui-react';
+import { Button, Icon, Loader, Rating, Modal, Header, List } from 'semantic-ui-react';
 import ListeningArea from '../../../components/listeningArea';
 
 
@@ -11,7 +11,18 @@ const Game = ({ level, wordsRead, endGame, saveGame, totalTime, gameStatus, word
         if (gameStatus === 'SALVANDO') {
             saveGame(level, currentCount, wordsRead);
         }
-    })
+    });
+
+
+    const [showInstructionModal, setShowInstructionModal] = useState(false);
+
+    const openInstructions = () => {
+        setShowInstructionModal(true);
+    }
+
+    const closeInstructions = () => {
+        setShowInstructionModal(false);
+    }
 
     return (
         <div className='game-menu-container'>
@@ -24,7 +35,7 @@ const Game = ({ level, wordsRead, endGame, saveGame, totalTime, gameStatus, word
                         <Icon name='gamepad'></Icon>
                             Nova rodada
                         </Button>
-                    <Button color='blue' fluid size='big'>
+                    <Button color='blue' fluid size='big' onClick={openInstructions}>
                         <Icon name='question circle'></Icon>
                             Como jogar (para responsáveis)
                         </Button>
@@ -80,6 +91,35 @@ const Game = ({ level, wordsRead, endGame, saveGame, totalTime, gameStatus, word
                         </Button>
                 </div>
             }
+            <Modal closeIcon open={showInstructionModal} onClose={closeInstructions}>
+                <Header>Como jogar</Header>
+                <Modal.Content>
+                    <List bulleted>
+                        <List.Item>
+                            Para iniciar o jogo, basta clicar no botão "Nova rodada".
+                        </List.Item>
+                        <List.Item>
+                            Você deve permitir o acesso do microfone pelo aplicativo.
+                        </List.Item>
+                        <List.Item>
+                            Palavras de diferentes dificuldades serão exibidas na tela e a criança deve
+                            fazer a leitura delas dentro de um tempo limite (em
+                            um ambiente com pouco ou nenhum ruído com finalidade de evitar
+                            interferência e consequentes problemas no reconhecimento da voz).
+                        </List.Item>
+                        <List.Item>
+                            O tempo total de leitura se refere à soma do tempo de leitura de todas as palavras.
+                        </List.Item>
+                        <List.Item>
+                            Ao finalizar a partida, o resultado obtido é salvo e pode ser visualizado no histórico do usuário (presente na aba "Desempenho").
+                        </List.Item>
+                    </List>
+                    <p>
+                        Bom jogo!
+                    </p>
+
+                </Modal.Content>
+            </Modal>
         </div>
     )
 }

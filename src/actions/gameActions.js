@@ -33,7 +33,7 @@ export const play = (dispatch) => {
     }
 }
 
-export const startNewGame = (dispatch) => {
+export const resetGameState = (dispatch) => {
     return () => dispatch({ type: NOVA_PARTIDA })
 }
 

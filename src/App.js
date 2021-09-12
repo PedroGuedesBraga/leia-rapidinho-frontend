@@ -6,7 +6,7 @@ import reducer from './reducers';
 import { createStore } from 'redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoggedInArea from './containers/LoggedInArea';
-import PrivateRoute from './components/privateRoute'
+import CustomRoute from './components/CustomRoute'
 
 const store = createStore(reducer);
 
@@ -15,16 +15,14 @@ function App() {
     <Router>
       <Provider store={store}>
         <Switch>
-          <Route path="/register" exact>
-            <Register></Register>
-          </Route>
-          <Route path="/login" exact>
-            <Login></Login>
-          </Route>
-          <Route path="/reset" exact>
+          <CustomRoute path="/register" component={Register} exact>
+          </CustomRoute>
+          <CustomRoute path="/login" component={Login} exact>
+          </CustomRoute>
+          <CustomRoute path="/reset" exact>
             <ResetPassword></ResetPassword>
-          </Route>
-          <PrivateRoute path="/" component={LoggedInArea}></PrivateRoute>
+          </CustomRoute>
+          <CustomRoute path="/" type="private" component={LoggedInArea}></CustomRoute>
         </Switch>
       </Provider>
     </Router>

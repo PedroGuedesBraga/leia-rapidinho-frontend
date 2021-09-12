@@ -41,6 +41,7 @@ const Login = ({ toastResetStatus, toastResetHeader, toastResetBody }) => {
             console.log('logando 2')
             setFormLoading(true);
             await authenticate(user);
+            history.push('/game')
         } catch (error) {
             setErrorLogin(true);
         }
@@ -89,6 +90,7 @@ const Login = ({ toastResetStatus, toastResetHeader, toastResetBody }) => {
                 <h2 className="logo-subtitle">Entre com sua conta</h2>
             </div>
             <div className="frm">
+                <Logo inverted mobile></Logo>
                 {errMsg}
                 {successTokenResetMessage}
                 {successVerifyEmailMessage}
