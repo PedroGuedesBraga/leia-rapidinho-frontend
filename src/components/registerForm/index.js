@@ -32,6 +32,7 @@ const RegisterForm = ({ loading, register, routeToLogin }) => {
     return (
         <div>
 
+            
             <h2>Crie sua conta</h2>
             <Form loading={loading} onSubmit={handleSubmit} size="large">
                 <Form.Input value={user.userName} onChange={(e) => { handleInputChange(e, 'userName') }} required label='Nome' placeholder='Digite seu nome' />

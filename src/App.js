@@ -19,8 +19,7 @@ function App() {
           </CustomRoute>
           <CustomRoute path="/login" component={Login} exact>
           </CustomRoute>
-          <CustomRoute path="/reset" exact>
-            <ResetPassword></ResetPassword>
+          <CustomRoute path="/reset" component={ResetPassword} exact>
           </CustomRoute>
           <CustomRoute path="/" type="private" component={LoggedInArea}></CustomRoute>
         </Switch>
