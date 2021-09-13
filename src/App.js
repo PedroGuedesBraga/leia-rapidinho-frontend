@@ -1,12 +1,12 @@
-import Register from './containers/register'
-import Login from './containers/login'
+import Register from './containers/register';
+import Login from './containers/login';
 import ResetPassword from './containers/resetPassword';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import { createStore } from 'redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoggedInArea from './containers/LoggedInArea';
-import CustomRoute from './components/CustomRoute'
+import CustomRoute from './components/CustomRoute';
 
 const store = createStore(reducer);
 
@@ -22,6 +22,7 @@ function App() {
           <CustomRoute path="/reset" component={ResetPassword} exact>
           </CustomRoute>
           <CustomRoute path="/" type="private" component={LoggedInArea}></CustomRoute>
+          <CustomRoute component={Login}></CustomRoute>
         </Switch>
       </Provider>
     </Router>
