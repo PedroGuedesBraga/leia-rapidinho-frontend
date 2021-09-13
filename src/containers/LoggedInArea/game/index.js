@@ -9,7 +9,7 @@ import ListeningArea from '../../../components/listeningArea';
 const Game = ({ level, wordsRead, endGame, saveGame, totalTime, gameStatus, word, getWords, play, currentCount, totalWords, startNewGame }) => {
     useEffect(() => {
         if (gameStatus === 'SALVANDO') {
-            saveGame(level, currentCount, wordsRead);
+            saveGame(wordsRead);
         }
     });
 

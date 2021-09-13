@@ -4,7 +4,7 @@ import { loginUser, getToken } from '../utils';
 export const verifyEmail = async (email, token) => {
     try {
         const data = { email, token }
-        await axios.get(`http://localhost:8090/users/verify?email=${email}&token=${token}`);
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/verify?email=${email}&token=${token}`);
     } catch (err) {
         console.log(`Ocorreu um erro ao tentar verificar o email. [${JSON.stringify(err)}]`)
         throw err;
@@ -14,7 +14,7 @@ export const verifyEmail = async (email, token) => {
 export const getProfile = async () => {
     try {
         const token = getToken();
-        const response = await axios.get(`http://localhost:8090/users/profile`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/profile`, {
             headers: {
                 'x-access-token': token
             }
@@ -29,7 +29,7 @@ export const getProfile = async () => {
 export const authenticate = async (user) => {
     console.log('Realizando login do usuario ' + JSON.stringify(user));
     try {
-        const response = await axios.post('http://localhost:8090/users/login', user);
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, user);
         const { access_token } = response.data;
         loginUser(access_token);
     } catch (err) {
@@ -39,7 +39,7 @@ export const authenticate = async (user) => {
 
 export const createAccount = async (user) => {
     try {
-        await axios.post('http://localhost:8090/users/register', user);
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, user);
         return { success: true }
     } catch (err) {
         const error = new Error('Erro ao tentar criar conta.');

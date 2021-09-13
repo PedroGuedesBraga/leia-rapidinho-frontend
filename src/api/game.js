@@ -4,7 +4,7 @@ import { getToken } from '../utils/index';
 export const buscarPalavras = async (email) => {
     try {
         const token = getToken();
-        const res = await axios.post('http://localhost:8090/words', undefined, {
+        const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/words`, undefined, {
             headers: {
                 'x-access-token': token
             }
@@ -23,11 +23,11 @@ export const buscarPalavras = async (email) => {
     }
 }
 
-export const salvarJogo = async (level, wordsRead) => {
+export const salvarJogo = async (wordsRead) => {
     try {
         const token = getToken();
         console.log('Chamando api para salvar jogo')
-        await axios.post('http://localhost:8090/saveGame', { difficulty: level, wordsRead }, {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/saveGame`, { wordsRead }, {
             headers: {
                 'x-access-token': token
             }

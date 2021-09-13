@@ -14,11 +14,11 @@ export const getWords = (dispatch) => {
 }
 
 export const saveGame = (dispatch) => {
-    return async (level, score, wordsRead) => {
+    return async (wordsRead) => {
         try {
             console.log('Chamando action de salvar jogo')
             dispatch({ type: SALVAR_JOGO })
-            await salvarJogo(level, wordsRead);
+            await salvarJogo(wordsRead);
         } catch (err) {
             console.log(`Ocorreu um erro ao tentar salvar jogo => ${err}}`);
         }

@@ -83,7 +83,7 @@ const Profile = ({ getProfile }) => {
                         <Card.Content extra>
                             <Card.Description>
                                 <Icon name='info' />
-                            Fez <b>{profileData.wordsSummary.easy}</b> fáceis, <b>{profileData.wordsSummary.medium}</b> médias e <b>{profileData.wordsSummary.hard}</b> difíceis
+                            Leu <b>{profileData.wordsSummary.easy}</b> fáceis, <b>{profileData.wordsSummary.medium}</b> médias e <b>{profileData.wordsSummary.hard}</b> difíceis
                     </Card.Description>
                         </Card.Content>
                         <Card.Content>

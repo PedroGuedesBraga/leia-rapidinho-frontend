@@ -3,7 +3,7 @@ import { SEM_JOGO, BUSCA_PALAVRAS, PREPARAR, JOGAR, FINALIZAR, NOVA_PARTIDA, SAL
 const INITIAL_STATE = {
     status: 'SEM_JOGO',
     words: [],
-    currentWord: '',
+    currentWord: undefined,
     totalWords: 0,
     currentCount: 0,
     totalTime: 0,
@@ -36,6 +36,7 @@ export const gameReducer = (state = INITIAL_STATE, action) => {
             if (state.words.length === 0) {
                 return {
                     ...state,
+                    wordsRead: [...state.wordsRead, state.currentWord],
                     currentCount: state.currentCount + 1,
                     status: 'SALVANDO'
                 }
