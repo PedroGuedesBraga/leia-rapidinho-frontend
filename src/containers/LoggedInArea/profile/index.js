@@ -107,7 +107,6 @@ const Profile = ({ getProfile }) => {
                         </Card.Content>
                     </Card>
             }
-            }
         </div>
     )
 }

@@ -20,8 +20,8 @@ const ListeningArea = ({ word, play, currentCount, totalWords, totalTime, onTime
                         setConfetti(true);
                         setTimeout(() => {
                             setConfetti(false);
-                            play(word)
-                        }, 2500);
+                        }, 2000);
+                        play(word)
 
                     }
                 },
