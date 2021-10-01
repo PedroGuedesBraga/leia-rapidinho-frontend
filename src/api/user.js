@@ -13,7 +13,7 @@ export const verifyEmail = async (email, token) => {
 
 export const sendResetToken = async (email) => {
     try {
-        await axios.post(`${process.env.REACT_APP_SERVER_URL}`, { email });
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/reset/send`, { email });
     } catch (err) {
         console.log(`Ocorreu um erro ao tentar enviar token de reset. [${JSON.stringify(err)}]`)
         throw err;
@@ -22,7 +22,7 @@ export const sendResetToken = async (email) => {
 
 export const resetUserPassword = async (email, newPassword, token) => {
     try {
-        await axios.post('http://localhost:8090/users/reset/validate', { email, newPassword, token });
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/reset/validate`, { email, newPassword, token });
     } catch (err) {
         console.log(`Ocorreu um erro ao tentar resetar a senha`, err);
         throw err;
