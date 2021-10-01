@@ -42,7 +42,10 @@ const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime
                 </Menu>
             </div>
             <Switch>
-                <Route path="/game">
+                <Route path="/profile">
+                    <Profile getProfile={getProfile}></Profile>
+                </Route>
+                <Route>
                     <Game
                         getWords={getWords}
                         play={play}
@@ -58,9 +61,6 @@ const LoggedInArea = ({ dispatch, wordsRead, level, saveGame, endGame, totalTime
                         wordsRead={wordsRead}
                         dispatch={dispatch}
                     />
-                </Route>
-                <Route path="/profile">
-                    <Profile getProfile={getProfile}></Profile>
                 </Route>
             </Switch>
         </>
