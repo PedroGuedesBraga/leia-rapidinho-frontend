@@ -7,6 +7,7 @@ import {
     ERRO_RESET_VERIFY
 } from './actionTypes';
 import axios from 'axios';
+import { resetUserPassword, sendResetToken } from '../api/user';
 
 export const sendToken = (dispatch) => {
     return async (email) => {
@@ -18,7 +19,7 @@ export const sendToken = (dispatch) => {
             }
         });
         try {
-            await axios.post('http://localhost:8090/users/reset/send', { email });
+            await sendResetToken(email);
             dispatch({
                 type: SUCESSO_RESET_SEND,
                 payload: {
@@ -52,7 +53,7 @@ export const resetPassword = (dispatch) => {
             }
         });
         try {
-            await axios.post('http://localhost:8090/users/reset/validate', { email, newPassword, token });
+            await resetUserPassword(email, newPassword, token);
             dispatch({
                 type: SUCESSO_RESET_VERIFY,
                 payload: {
