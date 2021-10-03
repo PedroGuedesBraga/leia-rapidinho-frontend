@@ -58,6 +58,8 @@ const Login = ({ toastResetStatus, toastResetHeader, toastResetBody }) => {
         history.push('/reset');
     }
 
+    const isRunningOnChrome = navigator.userAgent.includes('Chrome');
+
     const errMsg = errorLogin && (
         <Message
             negative
@@ -95,7 +97,11 @@ const Login = ({ toastResetStatus, toastResetHeader, toastResetBody }) => {
                 {successTokenResetMessage}
                 {successVerifyEmailMessage}
                 {errorVerifyEmailMessage}
-                <LoginForm loading={formLoading} routeToReset={routeToReset} routeToRegister={routeToRegister} login={login}></LoginForm>
+                {isRunningOnChrome ?
+                    <LoginForm loading={formLoading} routeToReset={routeToReset} routeToRegister={routeToRegister} login={login}></LoginForm>
+                    :
+                    <h3>Certifique-se de usar o navegador Google Chrome para usar a aplicação. O navegador atual é incompatível no momento.</h3>
+                }
             </div>
 
         </div>
