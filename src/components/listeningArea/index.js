@@ -41,7 +41,7 @@ const ListeningArea = ({ word, play, currentCount, totalWords, totalTime, onTime
     });
 
     useEffect(() => {
-        SpeechRecognition.startListening({ language: 'pt-br' });
+        SpeechRecognition.startListening({ language: 'pt-BR' });
     });
 
 
